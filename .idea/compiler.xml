@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="springboot-netty" />
+        <module name="netty-example--learn-" />
       </profile>
     </annotationProcessing>
   </component>
