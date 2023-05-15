@@ -1,5 +1,6 @@
 package AIO;
 
+import java.io.IOException;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
 import java.nio.charset.Charset;
@@ -13,13 +14,13 @@ public abstract class ChannelAdapter implements CompletionHandler<Integer, Objec
     private AsynchronousSocketChannel channel;
     private Charset charset;
 
-    public abstract void channelActive(final ChannelHandler ctx);
+    public abstract void channelActive(final ChannelHandler ctx) throws IOException;
 
     public abstract void channelInactive(final ChannelHandler ctx);
 
     public abstract void channelRead(final ChannelHandler ctx, final Object msg);
 
-    public ChannelAdapter(final AsynchronousSocketChannel channel, final Charset charset) {
+    public ChannelAdapter(final AsynchronousSocketChannel channel, final Charset charset) throws IOException {
         this.channel = channel;
         this.charset = charset;
         if (channel.isOpen()) {
