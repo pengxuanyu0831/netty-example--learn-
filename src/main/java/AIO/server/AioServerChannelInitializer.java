@@ -1,9 +1,11 @@
 package AIO.server;
 
+import AIO.AIOClientHandler;
+import common.ChannelInitializer;
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelInitializer;
 
 import java.nio.ByteBuffer;
+import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.charset.Charset;
 import java.util.concurrent.TimeUnit;
 
@@ -15,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 public class AioServerChannelInitializer extends ChannelInitializer {
 
     @Override
-    protected void initChannel(Channel channel) throws Exception {
-//        channel.read(ByteBuffer.allocate(1024), 10, TimeUnit.SECONDS, null, new AioServerHandler(channel, Charset.forName("GBK")));
+    protected void initChannel(AsynchronousSocketChannel channel) throws Exception {
+        channel.read(ByteBuffer.allocate(1024), 10, TimeUnit.SECONDS, null, new AIOClientHandler(channel, Charset.forName("GBK")));
     }
 }

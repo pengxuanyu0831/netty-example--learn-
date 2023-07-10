@@ -1,10 +1,10 @@
 package AIO;
 
-import io.netty.channel.ChannelHandlerContext;
+import common.ChannelAdapter;
+import common.ChannelHandler;
 
 import java.io.IOException;
 import java.nio.channels.AsynchronousSocketChannel;
-import java.nio.channels.DatagramChannel;
 import java.nio.charset.Charset;
 import java.util.Date;
 

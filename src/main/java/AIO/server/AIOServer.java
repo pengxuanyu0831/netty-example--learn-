@@ -27,9 +27,12 @@ public class AIOServer extends Thread{
 
             CountDownLatch latch = new CountDownLatch(10);
 
-
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public AsynchronousServerSocketChannel serverSocketChannel() {
+        return socketChannel;
     }
 }
