@@ -1,8 +1,7 @@
 package AIO.server;
 
-import AIO.AIOClientHandler;
-import common.ChannelInitializer;
-import io.netty.channel.Channel;
+import AIO.client.AIOClientHandler;
+import AIO.ChannelInitializer;
 
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;

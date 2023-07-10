@@ -1,7 +1,5 @@
 package AIO.client;
 
-import AIO.AIOClientHandler;
-
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -18,11 +16,11 @@ import java.util.concurrent.Future;
 public class AIOClient {
     public static void main(String[] args) throws IOException, ExecutionException, InterruptedException {
         AsynchronousSocketChannel asynchronousSocketChannel = AsynchronousSocketChannel.open();
-        Future<Void> future = asynchronousSocketChannel.connect(new InetSocketAddress("localhost", 6662));
-        System.out.printf("AIO Client Start! ");
+        Future<Void> future = asynchronousSocketChannel.connect(new InetSocketAddress("localhost", 7394));
+        System.out.printf("AIO Client Start! \n");
         future.get();
         asynchronousSocketChannel.read(ByteBuffer.allocate(1024), null, new AIOClientHandler(asynchronousSocketChannel, Charset.forName("GBK")));
-        System.out.printf("AIO Client Start Done!");
+        System.out.printf("AIO Client Start Done! \n");
 
     }
 }

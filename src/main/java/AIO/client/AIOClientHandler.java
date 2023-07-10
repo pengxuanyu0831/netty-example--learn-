@@ -1,7 +1,7 @@
-package AIO;
+package AIO.client;
 
-import common.ChannelAdapter;
-import common.ChannelHandler;
+import AIO.ChannelAdapter;
+import AIO.ChannelHandler;
 
 import java.io.IOException;
 import java.nio.channels.AsynchronousSocketChannel;
@@ -22,7 +22,7 @@ public class AIOClientHandler extends ChannelAdapter {
     @Override
     public void channelActive(ChannelHandler ctx) throws IOException {
         try {
-            System.out.printf("AIO Client channelActive Done! " + ctx.channel().getRemoteAddress());
+            System.out.printf("AIO Client channelActive Done! " + ctx.channel().getRemoteAddress() + "\n");
         } catch (Exception e) {
             e.printStackTrace();
             throw e;

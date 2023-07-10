@@ -24,15 +24,22 @@ public class AIOServer extends Thread{
         try {
             socketChannel = AsynchronousServerSocketChannel.open(AsynchronousChannelGroup.withCachedThreadPool(Executors.newCachedThreadPool(), 10));
             socketChannel.bind(new InetSocketAddress(7394));
-
+            System.out.printf("AIO Server Start! ---> port " + 7394 + "\n");
             CountDownLatch latch = new CountDownLatch(10);
+            socketChannel.accept(this, new AioServerChannelInitializer());
+            latch.await();
 
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
     }
 
     public AsynchronousServerSocketChannel serverSocketChannel() {
         return socketChannel;
+    }
+
+
+    public static void main(String[] args) {
+        new AIOServer().start();
     }
 }
