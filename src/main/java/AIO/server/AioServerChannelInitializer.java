@@ -17,6 +17,6 @@ public class AioServerChannelInitializer extends ChannelInitializer {
 
     @Override
     protected void initChannel(AsynchronousSocketChannel channel) throws Exception {
-        channel.read(ByteBuffer.allocate(1024), 10, TimeUnit.SECONDS, null, new AIOClientHandler(channel, Charset.forName("GBK")));
+        channel.read(ByteBuffer.allocate(1024), 10, TimeUnit.SECONDS, null, new AioServerHandler(channel, Charset.forName("GBK")));
     }
 }

@@ -25,7 +25,7 @@ public class AIOServer extends Thread{
             socketChannel = AsynchronousServerSocketChannel.open(AsynchronousChannelGroup.withCachedThreadPool(Executors.newCachedThreadPool(), 10));
             socketChannel.bind(new InetSocketAddress(7394));
             System.out.printf("AIO Server Start! ---> port " + 7394 + "\n");
-            CountDownLatch latch = new CountDownLatch(10);
+            CountDownLatch latch = new CountDownLatch(1);
             socketChannel.accept(this, new AioServerChannelInitializer());
             latch.await();
 

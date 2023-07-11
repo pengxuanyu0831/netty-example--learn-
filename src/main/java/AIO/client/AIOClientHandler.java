@@ -22,7 +22,7 @@ public class AIOClientHandler extends ChannelAdapter {
     @Override
     public void channelActive(ChannelHandler ctx) throws IOException {
         try {
-            System.out.printf("AIO Client channelActive Done! " + ctx.channel().getRemoteAddress() + "\n");
+            System.out.printf("AIO Client channelActive Done! " + ctx.channel().getRemoteAddress() );
         } catch (Exception e) {
             e.printStackTrace();
             throw e;
@@ -41,7 +41,7 @@ public class AIOClientHandler extends ChannelAdapter {
      */
     @Override
     public void channelRead(ChannelHandler ctx, Object msg) {
-        System.out.printf("服务端 于" + new Date() + "收到消息！：" + msg);
+        System.out.printf("客户端 于" + new Date() + "收到消息！：" + msg);
         ctx.writeAndFlush(msg);
     }
 }

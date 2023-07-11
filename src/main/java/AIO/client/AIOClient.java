@@ -21,6 +21,6 @@ public class AIOClient {
         future.get();
         asynchronousSocketChannel.read(ByteBuffer.allocate(1024), null, new AIOClientHandler(asynchronousSocketChannel, Charset.forName("GBK")));
         System.out.printf("AIO Client Start Done! \n");
-
+        Thread.sleep(100000);
     }
 }
