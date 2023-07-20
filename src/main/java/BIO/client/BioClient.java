@@ -2,6 +2,7 @@ package BIO.client;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.nio.charset.Charset;
 import java.util.Scanner;
 
 /**
@@ -13,9 +14,9 @@ import java.util.Scanner;
 public class BioClient {
     public static void main(String[] args) throws IOException {
         Socket socket = new Socket("localhost",6666);
-        Scanner scanner = new Scanner(System.in);
-        while (scanner.hasNext()) {
-            socket.getOutputStream().write(scanner.nextLine().getBytes());
-        }
+        System.out.printf("BIO Client start !");
+
+        BIOClientHandler bioClientHandler = new BIOClientHandler(socket, Charset.forName("GBK"));
+        bioClientHandler.start();
     }
 }

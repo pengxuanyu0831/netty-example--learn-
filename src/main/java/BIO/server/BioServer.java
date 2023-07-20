@@ -1,9 +1,12 @@
 package BIO.server;
 
+import javax.swing.text.StyledEditorKit;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.charset.Charset;
 
 /**
  * @program springboot-netty
@@ -11,20 +14,29 @@ import java.net.Socket;
  * @author: pengxuanyu
  * @create: 2022/04/22 20:07
  */
-public class BioServer {
+public class BioServer extends Thread {
+    private ServerSocket serverSocket = null;
+
     public static void main(String[] args) throws IOException {
-        ServerSocket serverSocket = new ServerSocket(6666);
-        // 阻塞， 直到有客户端接入
-        while (true) {
-            Socket socket = serverSocket.accept();
-            int len = -1;
-            // 读取的数据长度
-            byte[] data = new byte[1024];
-            InputStream inputStream = socket.getInputStream();
-            int i = inputStream.read(data);
-            while (i != -1) {
-                System.out.println(new String(data, 0, len));
+        BioServer bioServer = new BioServer();
+        bioServer.start();
+    }
+
+    @Override
+    public void run() {
+        try {
+            serverSocket = new ServerSocket();
+            serverSocket.bind(new InetSocketAddress(6666));
+
+            System.out.printf("BIO Server start !");
+
+            while (Boolean.TRUE) {
+                Socket socket = serverSocket.accept();
+                BIOServerHandler handler = new BIOServerHandler(socket, Charset.forName("GBK"));
+                handler.start();
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
