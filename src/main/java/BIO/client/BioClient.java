@@ -1,4 +1,4 @@
-package BIO;
+package BIO.client;
 
 import java.io.IOException;
 import java.net.Socket;
