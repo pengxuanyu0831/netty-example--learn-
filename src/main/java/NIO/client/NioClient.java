@@ -23,7 +23,7 @@ public class NioClient {
 
         open.configureBlocking(false);
 
-        boolean b = open.connect(new InetSocketAddress("127.0.0.1", 7394));
+        boolean b = open.connect(new InetSocketAddress("127.0.0.1", 7397));
 
         if (b) {
             open.register(selector, SelectionKey.OP_READ);
