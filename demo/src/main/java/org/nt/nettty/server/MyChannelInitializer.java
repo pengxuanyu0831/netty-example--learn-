@@ -16,5 +16,7 @@ public class MyChannelInitializer extends ChannelInitializer<SocketChannel> {
         System.out.printf("链接报告IP:" + ch.localAddress().getHostString());
         System.out.printf("链接报告Port:" + ch.localAddress().getPort());
         System.out.printf("链接报告完毕");
+        //在管道中添加我们自己的接收数据实现方法
+        ch.pipeline().addLast(new MyServerHadler());
     }
 }
