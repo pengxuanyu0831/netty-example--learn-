@@ -7,6 +7,7 @@ import io.netty.channel.socket.SocketChannel;
 
 
 import java.text.DateFormat;
+import java.util.Date;
 
 /**
  * @author xuanyu peng
@@ -18,6 +19,10 @@ public class MyServerHadler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         System.out.printf(DateFormat.getDateTimeInstance().format(System.currentTimeMillis()) + "接收到消息：");
 //        System.out.printf(new String(bytes, "GBK"));
+        String str = "服务端收到：" + new Date() + " " + msg + "\r\n";
+        ByteBuf buf = ctx.alloc().buffer(str.getBytes().length);
+        buf.writeBytes(str.getBytes("GBK"));
+        ctx.writeAndFlush(buf);
     }
 
     @Override
@@ -26,5 +31,15 @@ public class MyServerHadler extends ChannelInboundHandlerAdapter {
         System.out.printf("链接报告开始");
         System.out.printf("链接报告IP:" + ch.localAddress().getHostString());
         System.out.printf("链接报告Port:" + ch.localAddress().getPort());
+        String res = "[Netty]通知客户端连接建立成功" + " " + new Date() + " " + ch.localAddress().getHostString() + "\r\n";
+        ByteBuf buf = ctx.alloc().buffer(res.getBytes().length);
+        buf.readBytes(res.getBytes("GBK"));
+        ctx.writeAndFlush(buf);
+    }
+
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        System.out.printf("客户端断开链接" + ctx.channel().localAddress().toString());
     }
 }
