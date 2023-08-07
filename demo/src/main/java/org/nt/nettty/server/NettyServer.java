@@ -26,6 +26,7 @@ public class NettyServer {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap.group(eventLoopGroup, childGroup)
                     .channel(NioServerSocketChannel.class)
+                    // 非阻塞模式
                     .option(ChannelOption.SO_BACKLOG, 128)
                     .childHandler(new MyChannelInitializer());
 

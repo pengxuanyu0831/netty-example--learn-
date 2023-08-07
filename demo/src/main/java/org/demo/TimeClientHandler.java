@@ -2,10 +2,7 @@ package org.demo;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelHandler;
-import io.netty.channel.ChannelHandlerAdapter;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelPipeline;
+import io.netty.channel.*;
 
 import java.io.UnsupportedEncodingException;
 
@@ -14,7 +11,7 @@ import java.io.UnsupportedEncodingException;
  * @description:
  * @date 2023/8/5 15:23
  */
-public class TimeClientHandler extends ChannelHandlerAdapter {
+public class TimeClientHandler extends ChannelInboundHandlerAdapter {
 
 
     private final ByteBuf firstMessage;
@@ -27,12 +24,14 @@ public class TimeClientHandler extends ChannelHandlerAdapter {
     }
 
 
+    @Override
     public void channelActive(ChannelHandlerContext msg) {
         msg.writeAndFlush(firstMessage);
     }
 
 
     // 服务端返回应答消息时，此方法被调用
+    @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws UnsupportedEncodingException {
         ByteBuf buf = (ByteBuf) msg;
         byte[] bytes = new byte[buf.readableBytes()];
