@@ -34,12 +34,19 @@ public class TimeClient {
 
             // 发起异步连接操作
             ChannelFuture future = b.connect(host, port).sync();
-
+            System.out.printf("Netty Client connect done! port :" + port + " host :" + host + "\r\n");
             future.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             group.shutdownGracefully();
         }
     }
+
+    public static void main(String[] args) {
+        int port = 7397;
+        new TimeClient().connect(port, "127.0.0.1");
+    }
+
 }
+

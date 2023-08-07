@@ -28,9 +28,9 @@ public class MyServerHadler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         SocketChannel ch = (SocketChannel) ctx.channel();
-        System.out.printf("链接报告开始");
-        System.out.printf("链接报告IP:" + ch.localAddress().getHostString());
-        System.out.printf("链接报告Port:" + ch.localAddress().getPort());
+        System.out.printf("链接报告开始 \r\n");
+        System.out.printf("链接报告IP:" + ch.localAddress().getHostString() + "\r\n");
+        System.out.printf("链接报告Port:" + ch.localAddress().getPort()+"\r\n");
         String res = "[Netty]通知客户端连接建立成功" + " " + new Date() + " " + ch.localAddress().getHostString() + "\r\n";
         ByteBuf buf = ctx.alloc().buffer(res.getBytes().length);
         buf.readBytes(res.getBytes("GBK"));
