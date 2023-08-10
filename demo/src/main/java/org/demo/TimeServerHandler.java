@@ -10,6 +10,7 @@ import io.netty.channel.*;
  * @date 2023/7/31 22:41
  */
 public class TimeServerHandler extends ChannelInboundHandlerAdapter {
+    private int count;
     /**
      * Calls {@link ChannelHandlerContext#fireChannelRead(Object)} to forward
      * to the next {@link ChannelInboundHandler} in the {@link ChannelPipeline}.
@@ -24,12 +25,13 @@ public class TimeServerHandler extends ChannelInboundHandlerAdapter {
         ByteBuf byteBuf = (ByteBuf) msg;
         byte[] bytes = new byte[byteBuf.readableBytes()];
         byteBuf.readBytes(bytes);
+        count += 1;
 
         String body = new String(bytes, "UTF-8");
         System.out.printf("The time server receive order : " + body);
 
         ByteBuf buffer = Unpooled.copiedBuffer("Hello Netty".getBytes());
-        ctx.write(buffer);
+        ctx.writeAndFlush(buffer);
     }
 
     /**

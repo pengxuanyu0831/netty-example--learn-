@@ -8,13 +8,15 @@ import java.io.UnsupportedEncodingException;
 
 /**
  * @author xuanyu peng
- * @description:
+ * @description: 《Netty权威指南》 P75
  * @date 2023/8/5 15:23
  */
 public class TimeClientHandler extends ChannelInboundHandlerAdapter {
 
 
     private final ByteBuf firstMessage;
+
+    private int count;
 
     public TimeClientHandler() {
         byte[] bytes = "QUERY TIME ORDER".getBytes();
@@ -26,7 +28,12 @@ public class TimeClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext msg) {
-        msg.writeAndFlush(firstMessage);
+        ByteBuf byteBuf = null;
+        for (int i = 0; i < 100; i++) {
+            byteBuf = Unpooled.copiedBuffer(firstMessage);
+            msg.writeAndFlush(byteBuf);
+        }
+//        msg.writeAndFlush(firstMessage);
     }
 
 
@@ -38,7 +45,7 @@ public class TimeClientHandler extends ChannelInboundHandlerAdapter {
         buf.readBytes(bytes);
 
         String body = new String(bytes, "UTF-8");
-        System.out.println("Now is : " + body);
+        System.out.println("Now is : " + body + "the count is " + ++count);
     }
 
     /**
