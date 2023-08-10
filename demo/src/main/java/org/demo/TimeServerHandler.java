@@ -25,7 +25,7 @@ public class TimeServerHandler extends ChannelInboundHandlerAdapter {
         ByteBuf byteBuf = (ByteBuf) msg;
         byte[] bytes = new byte[byteBuf.readableBytes()];
         byteBuf.readBytes(bytes);
-        count += 1;
+        ++count;
 
         String body = new String(bytes, "UTF-8");
         System.out.printf("The time server receive order : " + body);
