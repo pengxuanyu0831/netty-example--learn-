@@ -35,6 +35,8 @@ public class EchoServer {
                 @Override
                 protected void initChannel(SocketChannel ch) throws Exception {
                     ByteBuf delimiter = Unpooled.copiedBuffer("$_".getBytes());
+                    // 两个入参的构造函数： 1024表示单条消息的最大长度，当达到该长度后仍然没有查找到分隔符，就抛出TooLongFrameException异常，防止因异常缺失分隔符导致的内存溢出问题  666只能说
+                    // 第二个参数就是分隔符
                     ch.pipeline().addLast(new DelimiterBasedFrameDecoder(1024, delimiter));
                     ch.pipeline().addLast(new StringDecoder());
                     ch.pipeline().addLast(new EchoServerHandler());
