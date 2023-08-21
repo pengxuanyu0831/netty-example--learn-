@@ -37,6 +37,17 @@ public class Serializations {
         }
     }
 
+    public static <T> T deserialize(byte[] data, Class<T> cls) {
+        try {
+            T message = objenesis.newInstance(cls);
+            Schema<T> schema = getSchema(cls);
+            ProtostuffIOUtil.mergeFrom(data, message, schema);
+            return message;
+        } catch (Exception e) {
+            throw new IllegalStateException(e.getMessage(), e);
+        }
+    }
+
     private static <T> Schema<T> getSchema(Class<T> cls) {
         Schema<T> schema = (Schema<T>) cachedSchema.get(cls);
         if (schema == null) {
