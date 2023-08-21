@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="demo" />
         <module name="springboot-netty" />
+        <module name="guide" />
       </profile>
     </annotationProcessing>
   </component>
