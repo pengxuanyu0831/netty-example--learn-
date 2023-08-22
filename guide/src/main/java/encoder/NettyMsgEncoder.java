@@ -46,7 +46,7 @@ public final class NettyMsgEncoder extends MessageToMessageEncoder<Msg> {
             buffer.writeInt(keyArray.length);
             buffer.writeBytes(keyArray);
             value = param.getValue();
-            marshallingEncoder.encode(chx, value, buffer);
+//            marshallingEncoder.encode(chx, value, buffer);
         }
 
         key = null;
@@ -54,7 +54,7 @@ public final class NettyMsgEncoder extends MessageToMessageEncoder<Msg> {
         value = null;
 
         if (msg.getBody() != null) {
-            marshallingEncoder.encode(chx, msg.getBody(), buffer);
+//            marshallingEncoder.encode(chx, msg.getBody(), buffer);
         } else {
             buffer.writeInt(0);
             buffer.setInt(4, buffer.readableBytes());
